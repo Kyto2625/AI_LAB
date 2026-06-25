@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Predict Yield &mdash; Refinery Yield Prediction System</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="brand">
+      <span class="mark"></span>
+      <span class="brand-text">Refinery<span class="light">YIELD</span></span>
+    </div>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/predict">Predict</a>
+      <a href="/model-info">Model Info</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="eyebrow">Step 1 of 2</div>
+    <h2 class="section-title">Crude Oil Input Properties</h2>
+
+    <form class="card" action="/predict" method="post">
+      <div class="form-grid">
+
+        <div>
+          <label for="api_gravity">API Gravity (&deg;API)</label>
+          <input type="number" step="0.01" name="api_gravity" id="api_gravity" placeholder="e.g. 32.5" required>
+          <div class="field-hint">Typical range: 10 (heavy) &ndash; 55 (light)</div>
+        </div>
+
+        <div>
+          <label for="specific_gravity">Specific Gravity</label>
+          <input type="number" step="0.0001" name="specific_gravity" id="specific_gravity" placeholder="e.g. 0.86" required>
+          <div class="field-hint">141.5 / (API + 131.5)</div>
+        </div>
+
+        <div>
+          <label for="pour_point_f">Pour Point (&deg;F)</label>
+          <input type="number" step="0.1" name="pour_point_f" id="pour_point_f" placeholder="e.g. 15" required>
+        </div>
+
+        <div>
+          <label for="viscosity_cst">Viscosity (cSt @ 100&deg;F)</label>
+          <input type="number" step="0.01" name="viscosity_cst" id="viscosity_cst" placeholder="e.g. 25.0" required>
+        </div>
+
+        <div>
+          <label for="sulfur_pct">Sulfur Content (wt%)</label>
+          <input type="number" step="0.001" name="sulfur_pct" id="sulfur_pct" placeholder="e.g. 1.2" required>
+        </div>
+
+        <div>
+          <label for="nitrogen_pct">Nitrogen Content (wt%)</label>
+          <input type="number" step="0.001" name="nitrogen_pct" id="nitrogen_pct" placeholder="e.g. 0.15" required>
+        </div>
+
+        <div>
+          <label for="geological_formation">Geological Formation</label>
+          <select name="geological_formation" id="geological_formation">
+            {% for f in formations %}
+              <option value="{{ f }}">{{ f }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+        <div>
+          <label for="crude_source">Crude Source Region</label>
+          <select name="crude_source" id="crude_source">
+            {% for s in sources %}
+              <option value="{{ s }}">{{ s }}</option>
+            {% endfor %}
+          </select>
+        </div>
+
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn">Predict Refinery Yield</button>
+        <a href="/" class="btn secondary">Cancel</a>
+      </div>
+    </form>
+  </main>
+
+</body>
+</html>

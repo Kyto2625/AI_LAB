@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Prediction Result &mdash; Refinery Yield Prediction System</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="brand">
+      <span class="mark"></span>
+      <span class="brand-text">Refinery<span class="light">YIELD</span></span>
+    </div>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/predict">Predict</a>
+      <a href="/model-info">Model Info</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="eyebrow">Step 2 of 2</div>
+    <h2 class="section-title">Predicted Refinery Yield</h2>
+
+    <div class="card">
+      <span class="badge">{{ model_name }}</span>
+      <div class="result-grid" style="margin-top: 22px;">
+        {% for r in results %}
+        <div class="yield-row">
+          <div class="yield-label">{{ r.fraction }}</div>
+          <div class="yield-bar-track">
+            <div class="yield-bar-fill" style="width: {{ r.value }}%;"></div>
+          </div>
+          <div class="yield-value">{{ r.value }}%</div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0; color: var(--teal); text-transform: uppercase; font-size: 0.95rem;">Input Summary</h3>
+      <table class="summary-table">
+        {% for key, val in input_summary.items() %}
+        <tr><td>{{ key.replace('_', ' ').title() }}</td><td>{{ val }}</td></tr>
+        {% endfor %}
+      </table>
+    </div>
+
+    <div class="form-actions">
+      <a href="/predict" class="btn">Run Another Prediction</a>
+      <a href="/model-info" class="btn secondary">View Model Accuracy</a>
+    </div>
+  </main>
+
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Petroleum Refinery Yield Prediction System</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="brand">
+      <span class="mark"></span>
+      <span class="brand-text">Refinery<span class="light">YIELD</span></span>
+    </div>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/predict">Predict</a>
+      <a href="/model-info">Model Info</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <div class="eyebrow">Chemical Engineering &middot; Machine Learning</div>
+        <h1>Predict Refinery <span>Yield</span> Before It Hits The Tower</h1>
+        <p class="lede">
+          Enter a crude oil's physicochemical properties and instantly estimate
+          the volumetric yield of light gas, kerosene, gas oil, lubricant
+          fractions, and residue &mdash; powered by a trained regression model.
+        </p>
+        <div class="form-actions">
+          <a href="/predict" class="btn">Run a Prediction</a>
+          <a href="/model-info" class="btn secondary">View Model Accuracy</a>
+        </div>
+      </div>
+
+      <div class="column-wrap">
+        <svg viewBox="0 0 200 320" xmlns="http://www.w3.org/2000/svg">
+          <rect x="70" y="20" width="60" height="260" rx="6" fill="#1a232d" stroke="#2c3a47" stroke-width="2"/>
+          <!-- fraction bands -->
+          <rect x="70" y="20"  width="60" height="38" fill="#e07b39" opacity="0.85"/>
+          <rect x="70" y="58"  width="60" height="48" fill="#d98b4f" opacity="0.8"/>
+          <rect x="70" y="106" width="60" height="58" fill="#3aa6a6" opacity="0.75"/>
+          <rect x="70" y="164" width="60" height="58" fill="#2c8a8a" opacity="0.8"/>
+          <rect x="70" y="222" width="60" height="58" fill="#445" opacity="0.9"/>
+          <!-- labels -->
+          <text x="138" y="42"  fill="#93a1ad" font-size="10" font-family="Consolas,monospace">Light Gas</text>
+          <text x="138" y="85"  fill="#93a1ad" font-size="10" font-family="Consolas,monospace">Kerosene</text>
+          <text x="138" y="138" fill="#93a1ad" font-size="10" font-family="Consolas,monospace">Gas Oil</text>
+          <text x="138" y="196" fill="#93a1ad" font-size="10" font-family="Consolas,monospace">Lubricant</text>
+          <text x="138" y="254" fill="#93a1ad" font-size="10" font-family="Consolas,monospace">Residue</text>
+          <!-- base -->
+          <rect x="55" y="280" width="90" height="14" rx="3" fill="#2c3a47"/>
+          <line x1="100" y1="294" x2="100" y2="312" stroke="#2c3a47" stroke-width="6"/>
+        </svg>
+      </div>
+    </section>
+
+    <div class="feature-grid">
+      <div class="card">
+        <h3>01 &middot; Input</h3>
+        <p>API gravity, specific gravity, pour point, viscosity, sulfur &amp; nitrogen content, geology, and source region.</p>
+      </div>
+      <div class="card">
+        <h3>02 &middot; Model</h3>
+        <p>Random Forest, XGBoost, and SVR are trained and compared; the best performer is deployed automatically.</p>
+      </div>
+      <div class="card">
+        <h3>03 &middot; Output</h3>
+        <p>Predicted yield (%) for five refinery fractions, visualized instantly in your browser.</p>
+      </div>
+    </div>
+
+    <p class="footer-note">
+      Petroleum Refinery Yield Prediction System &middot; Chemical Engineering Program &middot;
+      Mapua Malayan Colleges of Mindanao &middot; A.Y. 2025&ndash;2026
+    </p>
+  </main>
+
+</body>
+</html>

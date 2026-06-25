@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Model Info &mdash; Refinery Yield Prediction System</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="brand">
+      <span class="mark"></span>
+      <span class="brand-text">Refinery<span class="light">YIELD</span></span>
+    </div>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/predict">Predict</a>
+      <a href="/model-info">Model Info</a>
+    </nav>
+  </header>
+
+  <main>
+    <div class="eyebrow">Dataset &amp; Model</div>
+    <h2 class="section-title">Model Comparison &amp; Accuracy</h2>
+
+    <div class="card">
+      <p style="color: var(--text-muted); margin-top:0;">
+        Three regression algorithms were trained on an 80:20 train/test split and evaluated using
+        Mean Absolute Error (MAE), Root Mean Squared Error (RMSE), and R&sup2; Score.
+        The best-performing model, highlighted below, is the one currently deployed for predictions.
+      </p>
+
+      {% if comparison %}
+      <table class="metrics">
+        <tr><th>Model</th><th>MAE</th><th>RMSE</th><th>R&sup2; Score</th></tr>
+        {% for model, metrics in comparison.items() %}
+        <tr class="{{ 'best' if model == best_model_name else '' }}">
+          <td>{{ model }}{% if model == best_model_name %} &#9733;{% endif %}</td>
+          <td>{{ metrics['MAE'] }}</td>
+          <td>{{ metrics['RMSE'] }}</td>
+          <td>{{ metrics['R2'] }}</td>
+        </tr>
+        {% endfor %}
+      </table>
+      {% else %}
+      <p>No comparison results found. Run train_models.py first.</p>
+      {% endif %}
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0; color: var(--teal); text-transform: uppercase; font-size: 0.95rem;">R&sup2; Score by Algorithm</h3>
+      <img class="chart-img" src="{{ url_for('static', filename='model_comparison.png') }}" alt="Model comparison chart">
+    </div>
+
+    <div class="card">
+      <h3 style="margin-top:0; color: var(--teal); text-transform: uppercase; font-size: 0.95rem;">Top Feature Importances</h3>
+      <img class="chart-img" src="{{ url_for('static', filename='feature_importance.png') }}" alt="Feature importance chart">
+    </div>
+
+    <div class="form-actions">
+      <a href="/predict" class="btn">Run a Prediction</a>
+    </div>
+  </main>
+
+</body>
+</html>
